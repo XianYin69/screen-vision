@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "sw.py capture 输出",
+  "type": "object",
+  "required": ["window", "image", "size", "bbox", "dpi_mode", "bytes"],
+  "properties": {
+    "window": {"type": "string", "description": "来源窗口标题"},
+    "image": {"type": "string", "description": "PNG 绝对路径；必在缓存目录或 --out 指定处"},
+    "size": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2,
+      "description": "[宽, 高] 实际像素"},
+    "bbox": {"type": "array", "items": {"type": "integer"}, "minItems": 4, "maxItems": 4,
+      "description": "窗口名义 [left, top, right, bottom]"},
+    "dpi_mode": {"enum": ["per-monitor-v2", "system", "none"]},
+    "bytes": {"type": "integer", "minimum": 1, "description": "0 或极小即截图失败，调用方须中止"}
+  }
+}

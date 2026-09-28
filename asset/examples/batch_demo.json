@@ -1,0 +1,16 @@
+[
+  {
+    "note": "先跑 python scripts/sw.py list --filter SMSH 确认目标；index 会随前台变化，用 title 更稳",
+    "title": "SMSH",
+    "prompt": "概括这个窗口的用途与可见模块；若出现令牌/密钥/密码只报类别，不要输出值。",
+    "max_tokens": 300
+  },
+  {
+    "note": "minimize_safe=true 才允许自动还原后截图（默认拒绝最小化窗口）",
+    "title": "任务管理器",
+    "prompt": "这个窗口当前显示了什么？给出关键信息。",
+    "max_tokens": 250,
+    "minimize_safe": true,
+    "all_screens": true
+  }
+]

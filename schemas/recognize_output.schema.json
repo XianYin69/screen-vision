@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "recognize.py ask 输出",
+  "type": "object",
+  "required": ["reply", "usage", "model", "window", "image", "prompt"],
+  "properties": {
+    "reply": {"type": "string", "description": "模型答复；敏感内容只报类别不复述原文"},
+    "usage": {"type": "object", "description": "网关计费字段，缺省为空对象"},
+    "model": {"type": "string", "description": "实际生效模型（config 或 --model）"},
+    "window": {"type": "string", "description": "来源窗口标题或图片文件名"},
+    "image": {"type": "string", "description": "送识别的 PNG 绝对路径"},
+    "prompt": {"type": "string"}
+  }
+}

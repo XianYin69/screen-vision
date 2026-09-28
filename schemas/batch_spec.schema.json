@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "recognize.py batch --spec 输入",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": ["prompt"],
+    "oneOf": [
+      {"required": ["title"]}, {"required": ["index"]}, {"required": ["image"]}
+    ],
+    "properties": {
+      "title": {"type": "string", "description": "窗口标题子串（唯一命中才可用）"},
+      "index": {"type": "integer", "description": "sw.py list 的 z-order 下标"},
+      "image": {"type": "string", "description": "已存在的 PNG 路径，跳过截取"},
+      "prompt": {"type": "string"},
+      "model": {"type": "string", "description": "缺省用 config.llm_gateway.model"},
+      "max_tokens": {"type": "integer", "default": 800},
+      "all_screens": {"type": "boolean", "default": false}
+    }
+  }
+}
