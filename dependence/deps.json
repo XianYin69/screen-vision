@@ -1,0 +1,54 @@
+{
+  "dependencies": [
+    {
+      "name": "pygetwindow",
+      "type": "software",
+      "source_url": "https://github.com/asweigart/PyGetWindow",
+      "license": "BSD-3-Clause",
+      "version": "0.0.9",
+      "install": "pip install pygetwindow",
+      "checked_at": "2026-09-29T23:46",
+      "source_url_status": "verified"
+    },
+    {
+      "name": "pillow",
+      "type": "software",
+      "source_url": "https://github.com/python-pillow/Pillow",
+      "license": "HPND",
+      "version": "12.3.0",
+      "install": "pip install pillow",
+      "checked_at": "2026-09-29T23:46",
+      "source_url_status": "verified"
+    },
+    {
+      "name": "requests",
+      "type": "software",
+      "source_url": "https://github.com/psf/requests",
+      "license": "Apache-2.0",
+      "version": "2.34.2",
+      "install": "pip install requests",
+      "checked_at": "2026-09-29T23:46",
+      "source_url_status": "verified"
+    },
+    {
+      "name": "numpy",
+      "type": "software",
+      "source_url": "https://github.com/numpy/numpy",
+      "license": "BSD-3-Clause",
+      "version": "2.5.3",
+      "install": "pip install numpy",
+      "checked_at": "2026-09-29T23:46",
+      "source_url_status": "verified"
+    },
+    {
+      "name": "mss",
+      "type": "software",
+      "source_url": "https://github.com/BoboTiG/python-mss",
+      "license": "MIT",
+      "version": "10.2.0",
+      "install": "pip install mss",
+      "checked_at": "2026-09-29T23:46",
+      "source_url_status": "verified"
+    }
+  ]
+}
