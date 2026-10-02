@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "vision_descriptor v2（screen-vision 结构化输出）",
+  "description": "recognize.py --structured / describe.py 的输出契约；旧 recognize_output 六字段保留必填（向后兼容超集）。",
+  "type": "object",
+  "required": ["reply", "usage", "model", "window", "image", "prompt"],
+  "properties": {
+    "reply": {"type": "string"},
+    "usage": {"type": "object"},
+    "model": {"type": "string"},
+    "window": {"type": "string"},
+    "image": {"type": "string"},
+    "prompt": {"type": "string"},
+    "schema": {"const": "vision_descriptor"},
+    "schema_version": {"const": 2},
+    "model_semantic": {"type": "boolean"},
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {"const": "screen"},
+        "window": {"type": "string"},
+        "image": {"type": "string"},
+        "size_px": {"type": "array", "items": {"type": "integer"}},
+        "dpi_scale": {"type": "number", "description": "物理/逻辑像素比 GetDpiForSystem/96，如实记录"},
+        "origin_screen_px": {"type": "array", "items": {"type": "integer"}, "description": "图像(0,0) 的屏幕物理坐标（top<0 clamp 回推后）"},
+        "monitor": {"type": "string"},
+        "window_z": {"type": ["integer", "null"], "description": "EnumWindows z-order 下标，0=顶层"}
+      }
+    },
+    "channels": {
+      "type": "object",
+      "properties": {
+        "mode": {"const": "rgb"},
+        "preprocess": {"type": "array", "items": {"enum": ["gray", "edge"]}},
+        "mean_rgb": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+        "saturation": {"type": "number"}, "contrast": {"type": "number"},
+        "gray_mean": {"type": "number"}, "edge_density": {"type": "number"},
+        "gray_hist_8": {"type": "array", "items": {"type": "number"}, "minItems": 8, "maxItems": 8}
+      }
+    },
+    "objects": {"type": "array", "items": {"$ref": "#/definitions/object"}},
+    "relations": {
+      "type": "object",
+      "properties": {
+        "pairs": {"type": "array", "items": {
+          "type": "object", "required": ["a", "b", "in_front"],
+          "properties": {
+            "a": {"type": "integer"}, "b": {"type": "integer"},
+            "in_front": {"type": "boolean"},
+            "cues": {"type": "array", "items": {"enum": ["occlusion", "relative_size", "baseline_y", "shadow", "defocus", "known_geometry"]}},
+            "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+          }}},
+        "note": {"type": "string"}
+      }
+    }
+  },
+  "definitions": {
+    "object": {
+      "type": "object",
+      "required": ["id", "type", "bbox_px", "bbox_norm", "center_px", "z_order", "z_basis"],
+      "properties": {
+        "id": {"type": "integer"},
+        "type": {"enum": ["button", "input", "text", "icon", "image", "list", "dialog", "checkbox", "link", "person", "face", "qr", "captcha", "other", "region"]},
+        "label": {"type": "string", "description": "敏感值只报类别，不复述原文"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "bbox_px": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+        "bbox_norm": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+        "center_px": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+        "screen_xy": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2, "description": "屏幕物理像素绝对坐标，safe-mouse-automation 直接可用"},
+        "screen_xy_logical": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2},
+        "z_order": {"type": "integer"},
+        "z_basis": {"enum": ["window_z", "pixel_occlusion"]},
+        "window_z": {"type": ["integer", "null"]},
+        "depth_cues": {"type": "object", "properties": {
+          "occludes": {"type": "array", "items": {"type": "integer"}},
+          "occluded_by": {"type": "array", "items": {"type": "integer"}},
+          "relative_size": {"type": "number"}, "baseline_y_norm": {"type": "number"},
+          "blur": {"type": "number"}}},
+        "channel": {"type": ["object", "null"]},
+        "affect": {"type": ["object", "null"], "description": "仅 face/content 域；UI 控件恒 null"},
+        "emotion": {"type": ["string", "null"], "description": "枚举 neutral|happy|sad|angry|surprised|fearful|disgusted|null；UI 控件恒 null"},
+        "actionable": {"type": "boolean"},
+        "action_hint": {"enum": ["click", "type", "drag", "scroll", "none"]}
+      }
+    }
+  }
+}
