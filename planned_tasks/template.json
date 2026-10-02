@@ -1,0 +1,11 @@
+{
+  "id": "pt-screen-vision-<slug>",
+  "title": "<一句话说明>",
+  "skill": "screen-vision",
+  "input": "<到期要执行的诉求原文>",
+  "schedule": {"mode": "at", "at": "<YYYY-MM-DDTHH:MM:SS>"},
+  "session": null,
+  "status": "pending",
+  "created": "<YYYY-MM-DDTHH:MM:SS>",
+  "next_run": "<YYYY-MM-DDTHH:MM:SS>"
+}

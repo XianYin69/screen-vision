@@ -16,7 +16,9 @@
       "prompt": {"type": "string"},
       "model": {"type": "string", "description": "缺省用 config.llm_gateway.model"},
       "max_tokens": {"type": "integer", "default": 800},
-      "all_screens": {"type": "boolean", "default": false}
+      "all_screens": {"type": "boolean", "default": false},
+      "structured": {"type": "boolean", "default": false,
+                     "description": "该项输出并入视觉契约 v2（默认关，保持旧输出兼容）"}
     }
   }
 }
