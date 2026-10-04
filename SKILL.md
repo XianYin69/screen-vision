@@ -1,5 +1,6 @@
 ---
 name: screen-vision
+version: 1.0.0
 description: >
   基本屏幕图像识别技能：枚举任意窗口、截取指定窗口 PNG、把图送 SMS 原生大模型网关做视觉识别。
   入口 sw.py（list/capture）、recognize.py（ask/batch，--structured=视觉契约 v2）、
