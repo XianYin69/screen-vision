@@ -18,7 +18,7 @@ metadata:
 
 ## 快速用法
 ```bash
-S=~/.kilocode/skills/screen-vision/scripts
+S=C:/Users/User/AppData/Local/SMS/skills/screen-vision/scripts
 python $S/sw.py list [--filter 子串]                        # z-order 窗口表（0=顶层）
 python $S/sw.py capture --title 子串|--index N [--out PATH]
 python $S/recognize.py ask --title SMSH --prompt "问题" [--structured]
